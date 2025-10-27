@@ -204,7 +204,8 @@ const Index = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-semibold mb-2">Объем (л)</label>
+                    <label className="block text-sm font-semibold mb-2">Объем двигателя (л)
+</label>
                     <input 
                       type="text"
                       placeholder="2.0"
