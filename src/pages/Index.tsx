@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
+import { useState } from "react";
 
 const Index = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const services = [
     {
       icon: "Wrench",
@@ -79,11 +82,73 @@ const Index = () => {
               <a href="#blog" className="hover:text-primary transition-colors">Блог</a>
               <a href="#contacts" className="hover:text-primary transition-colors">Контакты</a>
             </div>
-            <Button className="hidden md:block">
-              Записаться
-            </Button>
+            <div className="flex items-center gap-4">
+              <Button className="hidden md:block">
+                Записаться
+              </Button>
+              <button 
+                className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                <Icon name={mobileMenuOpen ? "X" : "Menu"} size={28} />
+              </button>
+            </div>
           </div>
         </div>
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-sm">
+            <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
+              <a 
+                href="#home" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Главная
+              </a>
+              <a 
+                href="#services" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Услуги
+              </a>
+              <a 
+                href="#portfolio" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Портфолио
+              </a>
+              <a 
+                href="#about" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                О нас
+              </a>
+              <a 
+                href="#blog" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Блог
+              </a>
+              <a 
+                href="#contacts" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Контакты
+              </a>
+              <Button 
+                className="w-full"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Записаться
+              </Button>
+            </div>
+          </div>
+        )}
       </nav>
 
       <section id="home" className="pt-32 pb-20 px-6">
