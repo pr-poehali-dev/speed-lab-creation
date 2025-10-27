@@ -5,65 +5,32 @@ import { useState } from "react";
 
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedEngine, setSelectedEngine] = useState("");
+  const [selectedPower, setSelectedPower] = useState("");
 
   const services = [
     {
-      icon: "Wrench",
-      title: "Техническое обслуживание",
-      description: "Полный комплекс работ по диагностике и обслуживанию автомобилей премиум-класса"
-    },
-    {
-      icon: "Paintbrush",
-      title: "Детейлинг",
-      description: "Профессиональная химчистка, полировка и защита кузова керамическими покрытиями"
+      icon: "Search",
+      title: "Компьютерная диагностика",
+      description: "Полная диагностика всех систем автомобиля с использованием профессионального оборудования"
     },
     {
       icon: "Zap",
-      title: "Тюнинг и модификация",
-      description: "Увеличение мощности двигателя, доработка подвески, установка спортивных компонентов"
-    },
-    {
-      icon: "Shield",
-      title: "Защита и оклейка",
-      description: "Антигравийные пленки, виниловая оклейка, бронирование оптики и фар"
+      title: "Чип-тюнинг",
+      description: "Увеличение мощности и крутящего момента двигателя, оптимизация расхода топлива"
     }
   ];
 
-  const portfolio = [
-    {
-      title: "Porsche 911 GT3",
-      category: "Тюнинг",
-      image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "BMW M5 Competition",
-      category: "Детейлинг",
-      image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "Mercedes-AMG GT",
-      category: "Защита",
-      image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80"
-    }
+  const carBrands = [
+    "Audi", "BMW", "Mercedes-Benz", "Volkswagen", "Porsche", "Toyota", "Honda", 
+    "Nissan", "Mazda", "Subaru", "Ford", "Chevrolet", "Hyundai", "Kia", "Lexus",
+    "Volvo", "Skoda", "Renault", "Peugeot", "Citroen", "Opel", "Mitsubishi", 
+    "Land Rover", "Jaguar", "Infiniti", "Acura", "Jeep", "Dodge", "Chrysler"
   ];
 
-  const blogPosts = [
-    {
-      title: "Как подготовить автомобиль к треку",
-      date: "15 октября 2024",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      title: "Керамические покрытия: мифы и реальность",
-      date: "10 октября 2024",
-      image: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      title: "Топ-5 модификаций для вашего BMW",
-      date: "5 октября 2024",
-      image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80"
-    }
-  ];
+  const years = Array.from({length: 30}, (_, i) => 2024 - i);
 
   return (
     <div className="min-h-screen">
@@ -77,9 +44,7 @@ const Index = () => {
             <div className="hidden md:flex items-center space-x-8">
               <a href="#home" className="hover:text-primary transition-colors">Главная</a>
               <a href="#services" className="hover:text-primary transition-colors">Услуги</a>
-              <a href="#portfolio" className="hover:text-primary transition-colors">Портфолио</a>
               <a href="#about" className="hover:text-primary transition-colors">О нас</a>
-              <a href="#blog" className="hover:text-primary transition-colors">Блог</a>
               <a href="#contacts" className="hover:text-primary transition-colors">Контакты</a>
             </div>
             <div className="flex items-center gap-4">
@@ -113,25 +78,11 @@ const Index = () => {
                 Услуги
               </a>
               <a 
-                href="#portfolio" 
-                className="hover:text-primary transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Портфолио
-              </a>
-              <a 
                 href="#about" 
                 className="hover:text-primary transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 О нас
-              </a>
-              <a 
-                href="#blog" 
-                className="hover:text-primary transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Блог
               </a>
               <a 
                 href="#contacts" 
@@ -161,15 +112,15 @@ const Index = () => {
                 <span className="text-primary">Dialog</span>
               </h1>
               <p className="text-xl text-muted-foreground">
-                Профессиональный автосервис полного цикла для автомобилей премиум-класса.
-                Тюнинг, детейлинг, техническое обслуживание.
+                Профессиональная диагностика и чип-тюнинг автомобилей. 
+                Увеличение мощности, оптимизация работы двигателя.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="text-lg">
-                  Наши услуги
+                <Button size="lg" className="text-lg" onClick={() => document.getElementById('services')?.scrollIntoView({behavior: 'smooth'})}>
+                  Записаться
                 </Button>
-                <Button size="lg" variant="outline" className="text-lg">
-                  Портфолио
+                <Button size="lg" variant="outline" className="text-lg" onClick={() => document.getElementById('about')?.scrollIntoView({behavior: 'smooth'})}>
+                  О нас
                 </Button>
               </div>
             </div>
@@ -189,52 +140,104 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">Наши услуги</h2>
-            <p className="text-xl text-muted-foreground">Полный спектр работ для вашего автомобиля</p>
+            <p className="text-xl text-muted-foreground">Диагностика и чип-тюнинг автомобилей</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {services.map((service, index) => (
               <Card 
                 key={index} 
-                className="p-6 hover:border-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 cursor-pointer group"
+                className="p-8 hover:border-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 cursor-pointer group"
               >
-                <div className="mb-4">
-                  <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Icon name={service.icon} size={28} className="text-primary" />
+                <div className="mb-6">
+                  <div className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <Icon name={service.icon} size={32} className="text-primary" />
                   </div>
                 </div>
-                <h3 className="text-xl font-heading font-semibold mb-3">{service.title}</h3>
-                <p className="text-muted-foreground">{service.description}</p>
+                <h3 className="text-2xl font-heading font-semibold mb-4">{service.title}</h3>
+                <p className="text-muted-foreground text-lg">{service.description}</p>
               </Card>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section id="portfolio" className="py-20 px-6">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">Портфолио</h2>
-            <p className="text-xl text-muted-foreground">Наши последние проекты</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {portfolio.map((project, index) => (
-              <div 
-                key={index} 
-                className="group relative overflow-hidden rounded-lg cursor-pointer"
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <span className="text-primary text-sm font-semibold">{project.category}</span>
-                    <h3 className="text-2xl font-heading font-bold mt-2">{project.title}</h3>
+          
+          <div className="mt-20 max-w-3xl mx-auto">
+            <Card className="p-8">
+              <h3 className="text-2xl font-heading font-bold mb-6 text-center">Запись на диагностику</h3>
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Марка автомобиля</label>
+                  <select 
+                    value={selectedBrand}
+                    onChange={(e) => setSelectedBrand(e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                  >
+                    <option value="">Выберите марку</option>
+                    {carBrands.map((brand) => (
+                      <option key={brand} value={brand}>{brand}</option>
+                    ))}
+                  </select>
+                </div>
+                
+                <div className="grid md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Год выпуска</label>
+                    <select 
+                      value={selectedYear}
+                      onChange={(e) => setSelectedYear(e.target.value)}
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    >
+                      <option value="">Год</option>
+                      {years.map((year) => (
+                        <option key={year} value={year}>{year}</option>
+                      ))}
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Объем двигателя (л)</label>
+                    <input 
+                      type="text"
+                      value={selectedEngine}
+                      onChange={(e) => setSelectedEngine(e.target.value)}
+                      placeholder="1.6, 2.0, 3.0..."
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Мощность (л.с.)</label>
+                    <input 
+                      type="text"
+                      value={selectedPower}
+                      onChange={(e) => setSelectedPower(e.target.value)}
+                      placeholder="150, 200..."
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    />
                   </div>
                 </div>
+                
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Ваше имя</label>
+                  <input 
+                    type="text" 
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    placeholder="Иван Иванов"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Телефон</label>
+                  <input 
+                    type="tel" 
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    placeholder="+7 (999) 123-45-67"
+                  />
+                </div>
+                
+                <Button className="w-full" size="lg">
+                  Записаться на диагностику
+                </Button>
               </div>
-            ))}
+            </Card>
           </div>
         </div>
       </section>
@@ -278,39 +281,13 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="blog" className="py-20 px-6">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">Блог</h2>
-            <p className="text-xl text-muted-foreground">Полезные статьи и новости</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
-              <Card key={index} className="overflow-hidden hover:border-primary transition-all duration-300 cursor-pointer group">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="p-6">
-                  <div className="text-sm text-primary mb-3">{post.date}</div>
-                  <h3 className="text-xl font-heading font-semibold group-hover:text-primary transition-colors">
-                    {post.title}
-                  </h3>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="contacts" className="py-20 px-6 bg-secondary/30">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-6">
               <h2 className="text-4xl md:text-5xl font-heading font-bold">Контакты</h2>
               <p className="text-lg text-muted-foreground">
-                Свяжитесь с нами для консультации или записи на обслуживание
+                Свяжитесь с нами для консультации по диагностике и чип-тюнингу
               </p>
               <div className="space-y-4 pt-6">
                 <div className="flex items-center space-x-4">
@@ -342,37 +319,7 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            <Card className="p-8">
-              <form className="space-y-6">
-                <div>
-                  <label className="block text-sm font-semibold mb-2">Ваше имя</label>
-                  <input 
-                    type="text" 
-                    className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary focus:outline-none transition-colors"
-                    placeholder="Иван Иванов"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2">Телефон</label>
-                  <input 
-                    type="tel" 
-                    className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary focus:outline-none transition-colors"
-                    placeholder="+7 (999) 123-45-67"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2">Сообщение</label>
-                  <textarea 
-                    className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary focus:outline-none transition-colors resize-none"
-                    rows={4}
-                    placeholder="Расскажите о вашем автомобиле и желаемых услугах"
-                  ></textarea>
-                </div>
-                <Button type="submit" className="w-full" size="lg">
-                  Отправить заявку
-                </Button>
-              </form>
-            </Card>
+
           </div>
         </div>
       </section>
