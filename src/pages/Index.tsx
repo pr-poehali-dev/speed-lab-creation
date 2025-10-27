@@ -156,9 +156,9 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in">
               <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
-                Лаборатория
+                Car
                 <br />
-                <span className="text-primary">скорости</span>
+                <span className="text-primary">Dialog</span>
               </h1>
               <p className="text-xl text-muted-foreground">
                 Профессиональный автосервис полного цикла для автомобилей премиум-класса.
