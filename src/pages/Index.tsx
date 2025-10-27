@@ -124,7 +124,7 @@ const Index = () => {
               <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
                 Car
                 <br />
-                <span className="text-primary">Dialog</span>
+                <span className="text-primary">ADD Tuning</span>
               </h1>
               <p className="text-xl text-muted-foreground">
                 Профессиональная диагностика и чип-тюнинг автомобилей. 
