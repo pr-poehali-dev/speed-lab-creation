@@ -173,7 +173,87 @@ const Index = () => {
             ))}
           </div>
           
-          <div className="mt-20 max-w-3xl mx-auto">
+          <div className="mt-20 grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <Card className="p-8">
+              <h3 className="text-2xl font-heading font-bold mb-6 text-center">Запись на диагностику</h3>
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Марка автомобиля</label>
+                  <select 
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                  >
+                    <option value="">Выберите марку</option>
+                    {carBrands.map((brand) => (
+                      <option key={brand} value={brand}>{brand}</option>
+                    ))}
+                  </select>
+                </div>
+                
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Год выпуска</label>
+                    <select 
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    >
+                      <option value="">Год</option>
+                      {years.map((year) => (
+                        <option key={year} value={year}>{year}</option>
+                      ))}
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Объем (л)</label>
+                    <input 
+                      type="text"
+                      placeholder="2.0"
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Мощность</label>
+                    <input 
+                      type="text"
+                      placeholder="150"
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Ваше имя</label>
+                  <input 
+                    type="text" 
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    placeholder="Иван Иванов"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Телефон</label>
+                  <input 
+                    type="tel" 
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    placeholder="+7 (999) 123-45-67"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Описание проблемы (опционально)</label>
+                  <textarea 
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors resize-none"
+                    rows={3}
+                    placeholder="Опишите симптомы или проблему с автомобилем"
+                  ></textarea>
+                </div>
+                
+                <Button className="w-full" size="lg">
+                  Записаться на диагностику
+                </Button>
+              </div>
+            </Card>
+            
             <Card className="p-8">
               <h3 className="text-2xl font-heading font-bold mb-6 text-center">Запись на чип-тюнинг</h3>
               <div className="space-y-6">
