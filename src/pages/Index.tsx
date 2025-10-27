@@ -509,7 +509,7 @@ const Index = () => {
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">СВЯЖИТЕСЬ С НАМИ</h2>
             <p className="text-xl text-muted-foreground mb-2"></p>
             <p className="text-lg text-muted-foreground">Мы подберем актуальные услуги для вашего автомобиля и рассчитаем цену</p>
-            <p className="text-lg font-semibold text-primary mt-2">Мы Вам перезвоним</p>
+            <p className="text-lg font-semibold text-primary mt-2"></p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-12 mb-16">
