@@ -9,6 +9,7 @@ const Index = () => {
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedEngine, setSelectedEngine] = useState("");
   const [selectedPower, setSelectedPower] = useState("");
+  const [showCallbackForm, setShowCallbackForm] = useState(false);
   const [tuningOptions, setTuningOptions] = useState({
     stage1: false,
     speedLim: false,
@@ -449,15 +450,71 @@ const Index = () => {
                 </div>
               </div>
             </div>
+            
+            <Card className="p-8">
+              <h3 className="text-2xl font-heading font-bold mb-6 text-center">Оставьте свой номер</h3>
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Ваше имя</label>
+                  <input 
+                    type="text" 
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    placeholder="Иван Иванов"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Телефон</label>
+                  <input 
+                    type="tel" 
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    placeholder="+7 (999) 123-45-67"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Комментарий (опционально)</label>
+                  <textarea 
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors resize-none"
+                    rows={3}
+                    placeholder="Чем мы можем вам помочь?"
+                  ></textarea>
+                </div>
+                
+                <Button className="w-full" size="lg">
+                  Отправить заявку
+                </Button>
+              </div>
+            </Card>
+          </div>
+          
+          <div className="mt-16">
+            <h3 className="text-2xl font-heading font-bold mb-6 text-center">Как нас найти</h3>
+            <div className="w-full h-[450px] rounded-lg overflow-hidden shadow-xl">
+              <iframe 
+                src="https://yandex.ru/map-widget/v1/?um=constructor%3A64d15b8e3b8a8f4ec5f0c3e6d5b6c5e5c5e5c5e5&amp;source=constructor" 
+                width="100%" 
+                height="450" 
+                frameBorder="0"
+                className="w-full h-full"
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>
 
       <section id="contacts" className="py-20 px-6 bg-secondary/30">
         <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">СВЯЖИТЕСЬ С НАМИ</h2>
+            <p className="text-xl text-muted-foreground mb-2">ИЛИ ОСТАВЬТЕ СВОЙ НОМЕР</p>
+            <p className="text-lg text-muted-foreground">Мы подберем актуальные услуги для вашего автомобиля и рассчитаем цену</p>
+            <p className="text-lg font-semibold text-primary mt-2">Мы Вам перезвоним</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div className="space-y-6">
-              <h2 className="text-4xl md:text-5xl font-heading font-bold">Контакты</h2>
+              <h3 className="text-2xl font-heading font-bold">Контакты</h3>
               <p className="text-lg text-muted-foreground">
                 Свяжитесь с нами для консультации по диагностике и чип-тюнингу
               </p>
