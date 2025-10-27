@@ -9,6 +9,20 @@ const Index = () => {
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedEngine, setSelectedEngine] = useState("");
   const [selectedPower, setSelectedPower] = useState("");
+  const [tuningOptions, setTuningOptions] = useState({
+    stage1: false,
+    speedLim: false,
+    rpm: false,
+    noDPF: false,
+    noEGR: false,
+    noAdBlue: false,
+    noSwirl: false,
+    dtc: false
+  });
+
+  const handleOptionChange = (option: string) => {
+    setTuningOptions(prev => ({...prev, [option]: !prev[option]}));
+  };
 
   const services = [
     {
@@ -161,7 +175,7 @@ const Index = () => {
           
           <div className="mt-20 max-w-3xl mx-auto">
             <Card className="p-8">
-              <h3 className="text-2xl font-heading font-bold mb-6 text-center">Запись на диагностику</h3>
+              <h3 className="text-2xl font-heading font-bold mb-6 text-center">Запись на чип-тюнинг</h3>
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-semibold mb-2">Марка автомобиля</label>
@@ -216,6 +230,84 @@ const Index = () => {
                 </div>
                 
                 <div>
+                  <label className="block text-sm font-semibold mb-3">Пожалуйста, выберите программные опции:</label>
+                  <div className="space-y-3">
+                    <label className="flex items-center space-x-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={tuningOptions.stage1}
+                        onChange={() => handleOptionChange('stage1')}
+                        className="w-5 h-5 rounded border-border text-primary focus:ring-primary focus:ring-offset-0"
+                      />
+                      <span className="text-sm group-hover:text-primary transition-colors">Тюнинг Stage-1</span>
+                    </label>
+                    <label className="flex items-center space-x-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={tuningOptions.speedLim}
+                        onChange={() => handleOptionChange('speedLim')}
+                        className="w-5 h-5 rounded border-border text-primary focus:ring-primary focus:ring-offset-0"
+                      />
+                      <span className="text-sm group-hover:text-primary transition-colors">SpeedLim (изменение ограничения скорости)</span>
+                    </label>
+                    <label className="flex items-center space-x-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={tuningOptions.rpm}
+                        onChange={() => handleOptionChange('rpm')}
+                        className="w-5 h-5 rounded border-border text-primary focus:ring-primary focus:ring-offset-0"
+                      />
+                      <span className="text-sm group-hover:text-primary transition-colors">RPM (изменение отсечки по оборотам)</span>
+                    </label>
+                    <label className="flex items-center space-x-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={tuningOptions.noDPF}
+                        onChange={() => handleOptionChange('noDPF')}
+                        className="w-5 h-5 rounded border-border text-primary focus:ring-primary focus:ring-offset-0"
+                      />
+                      <span className="text-sm group-hover:text-primary transition-colors">noDPF (отключение сажевого фильтра)</span>
+                    </label>
+                    <label className="flex items-center space-x-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={tuningOptions.noEGR}
+                        onChange={() => handleOptionChange('noEGR')}
+                        className="w-5 h-5 rounded border-border text-primary focus:ring-primary focus:ring-offset-0"
+                      />
+                      <span className="text-sm group-hover:text-primary transition-colors">noEGR (отключение системы рециркуляции отработанных газов)</span>
+                    </label>
+                    <label className="flex items-center space-x-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={tuningOptions.noAdBlue}
+                        onChange={() => handleOptionChange('noAdBlue')}
+                        className="w-5 h-5 rounded border-border text-primary focus:ring-primary focus:ring-offset-0"
+                      />
+                      <span className="text-sm group-hover:text-primary transition-colors">noAdBlue (отключение системы впрыска мочевины)</span>
+                    </label>
+                    <label className="flex items-center space-x-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={tuningOptions.noSwirl}
+                        onChange={() => handleOptionChange('noSwirl')}
+                        className="w-5 h-5 rounded border-border text-primary focus:ring-primary focus:ring-offset-0"
+                      />
+                      <span className="text-sm group-hover:text-primary transition-colors">noSwirl (отключение вихревых заслонок)</span>
+                    </label>
+                    <label className="flex items-center space-x-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={tuningOptions.dtc}
+                        onChange={() => handleOptionChange('dtc')}
+                        className="w-5 h-5 rounded border-border text-primary focus:ring-primary focus:ring-offset-0"
+                      />
+                      <span className="text-sm group-hover:text-primary transition-colors">DTC (селективное отключение ошибок)</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <div>
                   <label className="block text-sm font-semibold mb-2">Ваше имя</label>
                   <input 
                     type="text" 
@@ -234,7 +326,7 @@ const Index = () => {
                 </div>
                 
                 <Button className="w-full" size="lg">
-                  Записаться на диагностику
+                  Записаться на чип-тюнинг
                 </Button>
               </div>
             </Card>
