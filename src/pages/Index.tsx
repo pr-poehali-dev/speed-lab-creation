@@ -560,7 +560,7 @@ const Index = () => {
               <Icon name="Car" size={28} className="text-primary" />
               <span className="text-xl font-heading font-bold">Автотюнинг ADD</span>
             </div>
-            <div className="text-muted-foreground text-sm">© 2025  ADD TUNING. Все права защищены.</div>
+            <div className="text-muted-foreground text-sm">© 2025 Автотюнинг ADD. Все права защищены.</div>
             <div className="flex space-x-4">
               <a href="#" className="hover:text-primary transition-colors">
                 <Icon name="Instagram" size={24} />
