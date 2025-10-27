@@ -558,7 +558,7 @@ const Index = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-2">
               <Icon name="Car" size={28} className="text-primary" />
-              <span className="text-xl font-heading font-bold">ADD TUNING</span>
+              <span className="text-xl font-heading font-bold">Автотюнинг ADD</span>
             </div>
             <div className="text-muted-foreground text-sm">© 2025  ADD TUNING. Все права защищены.</div>
             <div className="flex space-x-4">
