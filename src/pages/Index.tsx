@@ -213,7 +213,7 @@ const Index = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-semibold mb-2">Мощность</label>
+                    <label className="block text-sm font-semibold mb-2">Мощность (л.с.)</label>
                     <input 
                       type="text"
                       placeholder="150"
