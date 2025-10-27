@@ -54,7 +54,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Icon name="Car" size={32} className="text-primary" />
-              <span className="text-2xl font-heading font-bold">ADD TUNING</span>
+              <span className="text-2xl font-heading font-bold">Автотюнинг ADD</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#home" className="hover:text-primary transition-colors">Главная</a>
