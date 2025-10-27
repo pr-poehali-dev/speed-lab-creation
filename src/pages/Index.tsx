@@ -72,7 +72,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Icon name="Car" size={32} className="text-primary" />
-              <span className="text-2xl font-heading font-bold">LAB OF SPEED</span>
+              <span className="text-2xl font-heading font-bold">CAR DIALOG</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#home" className="hover:text-primary transition-colors">Главная</a>
@@ -252,7 +252,7 @@ const Index = () => {
             <div className="space-y-6">
               <h2 className="text-4xl md:text-5xl font-heading font-bold">О компании</h2>
               <p className="text-lg text-muted-foreground">
-                LAB OF SPEED — это команда профессионалов с многолетним опытом работы 
+                CAR DIALOG — это команда профессионалов с многолетним опытом работы 
                 с автомобилями премиум и спортивного класса.
               </p>
               <p className="text-lg text-muted-foreground">
@@ -337,7 +337,7 @@ const Index = () => {
                   </div>
                   <div>
                     <div className="font-semibold">Email</div>
-                    <div className="text-muted-foreground">info@labofspeed.ru</div>
+                    <div className="text-muted-foreground">info@cardialog.ru</div>
                   </div>
                 </div>
               </div>
@@ -382,10 +382,10 @@ const Index = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-2">
               <Icon name="Car" size={28} className="text-primary" />
-              <span className="text-xl font-heading font-bold">LAB OF SPEED</span>
+              <span className="text-xl font-heading font-bold">CAR DIALOG</span>
             </div>
             <div className="text-muted-foreground text-sm">
-              © 2024 LAB OF SPEED. Все права защищены.
+              © 2024 CAR DIALOG. Все права защищены.
             </div>
             <div className="flex space-x-4">
               <a href="#" className="hover:text-primary transition-colors">
