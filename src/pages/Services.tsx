@@ -79,6 +79,26 @@ const Services = () => {
     return carData[selectedBrand as keyof typeof carData] || [];
   }, [selectedBrand]);
 
+  const getCarImage = () => {
+    if (!selectedBrand && !selectedModel) {
+      return "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/c9df873a-1ce7-4a14-a5cc-62b840b9c3b9.jpg";
+    }
+    
+    const suvModels = ["Q3", "Q5", "Q7", "Q8", "X1", "X2", "X3", "X4", "X5", "X6", "X7", "GLA", "GLB", "GLC", "GLE", "GLS", "G-Class", "Tiguan", "Touareg", "T-Roc", "T-Cross", "RAV4", "Land Cruiser", "Highlander", "C-HR", "4Runner", "CR-V", "HR-V", "Pilot", "Qashqai", "X-Trail", "Juke", "CX-3", "CX-5", "CX-9", "Kuga", "Explorer", "Tahoe", "Suburban", "Tucson", "Santa Fe", "Creta", "Kona", "Sportage", "Sorento", "Seltos", "NX", "RX", "GX", "LX", "UX", "XC40", "XC60", "XC90", "Kodiaq", "Karoq", "Duster", "Kaptur", "2008", "3008", "5008", "C3 Aircross", "C5 Aircross", "Crossland", "Grandland", "Outlander", "Pajero", "ASX", "Eclipse Cross", "Forester", "XV", "Outback", "Cayenne", "Macan", "Defender", "Discovery", "Range Rover", "Range Rover Sport", "Range Rover Evoque", "F-Pace", "E-Pace", "I-Pace", "QX50", "QX60", "QX80", "MDX", "RDX", "Compass", "Cherokee", "Grand Cherokee", "Wrangler", "Durango", "Pacifica"];
+    
+    const sportsModels = ["TT", "R8", "M2", "M3", "M4", "M5", "Z4", "AMG GT", "911", "Taycan", "Mustang", "Camaro", "Corvette", "Stinger", "GT-R", "MX-5", "WRX", "Charger", "Challenger"];
+    
+    if (selectedModel && sportsModels.includes(selectedModel)) {
+      return "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/ff2765d8-718c-483c-93bf-04f4b55c8ae1.jpg";
+    }
+    
+    if (selectedModel && suvModels.includes(selectedModel)) {
+      return "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/84be35c5-3a7f-4bbe-8843-04680fa1b8ef.jpg";
+    }
+    
+    return "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/9dd5bfda-05fc-4d6e-8f8d-f5e8e0fa7264.jpg";
+  };
+
   return (
     <div className="min-h-screen pt-24 px-6 pb-20">
       <div className="container mx-auto">
@@ -182,6 +202,24 @@ const Services = () => {
           <Card className="p-8">
             <h3 className="text-2xl font-heading font-bold mb-6 text-center">Калькулятор чип-тюнинга</h3>
             <div className="space-y-4">
+              {(selectedBrand || selectedModel) && (
+                <div className="relative h-48 rounded-lg overflow-hidden mb-4">
+                  <img
+                    src={getCarImage()}
+                    alt={`${selectedBrand} ${selectedModel}`}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+                  {selectedBrand && (
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <p className="text-xl font-heading font-bold text-white">
+                        {selectedBrand} {selectedModel}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+              
               <div className="space-y-4 pb-4 border-b border-border">
                 <div>
                   <label className="block text-sm font-semibold mb-2">Марка</label>
