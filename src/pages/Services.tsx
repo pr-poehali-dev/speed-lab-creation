@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 const Services = () => {
   const [selectedBrand, setSelectedBrand] = useState("");
@@ -10,6 +10,7 @@ const Services = () => {
   const [selectedEngine, setSelectedEngine] = useState("");
   const [selectedPower, setSelectedPower] = useState("");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
   const [tuningOptions, setTuningOptions] = useState({
     stage1: false,
     speedLim: false,
@@ -118,6 +119,17 @@ const Services = () => {
     setCurrentImageIndex((prev) => (prev - 1 + carImages.length) % carImages.length);
   };
 
+  useEffect(() => {
+    if (!selectedBrand && !selectedModel) return;
+    if (isHovering) return;
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % carImages.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [selectedBrand, selectedModel, carImages.length, isHovering]);
+
   return (
     <div className="min-h-screen pt-24 px-6 pb-20">
       <div className="container mx-auto">
@@ -222,11 +234,15 @@ const Services = () => {
             <h3 className="text-2xl font-heading font-bold mb-6 text-center">Калькулятор чип-тюнинга</h3>
             <div className="space-y-4">
               {(selectedBrand || selectedModel) && (
-                <div className="relative h-64 rounded-lg overflow-hidden mb-4 group">
+                <div 
+                  className="relative h-64 rounded-lg overflow-hidden mb-4 group"
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                >
                   <img
                     src={carImages[currentImageIndex]}
                     alt={`${selectedBrand} ${selectedModel}`}
-                    className="w-full h-full object-cover transition-transform duration-300"
+                    className="w-full h-full object-cover transition-all duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
                   
