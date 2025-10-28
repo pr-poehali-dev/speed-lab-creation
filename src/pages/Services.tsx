@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useMemo } from "react";
 
 const Services = () => {
   const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedModel, setSelectedModel] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedEngine, setSelectedEngine] = useState("");
   const [selectedPower, setSelectedPower] = useState("");
@@ -17,7 +17,9 @@ const Services = () => {
     noEGR: false,
     noAdBlue: false,
     noSwirl: false,
-    dtc: false
+    dtc: false,
+    euro2: false,
+    noImmobilizer: false
   });
 
   const handleOptionChange = (option: string) => {
@@ -37,14 +39,45 @@ const Services = () => {
     }
   ];
 
-  const carBrands = [
-    "Audi", "BMW", "Mercedes-Benz", "Volkswagen", "Porsche", "Toyota", "Honda", 
-    "Nissan", "Mazda", "Subaru", "Ford", "Chevrolet", "Hyundai", "Kia", "Lexus",
-    "Volvo", "Skoda", "Renault", "Peugeot", "Citroen", "Opel", "Mitsubishi", 
-    "Land Rover", "Jaguar", "Infiniti", "Acura", "Jeep", "Dodge", "Chrysler"
-  ];
+  const carData = {
+    "Audi": ["A1", "A3", "A4", "A5", "A6", "A7", "A8", "Q3", "Q5", "Q7", "Q8", "TT", "R8"],
+    "BMW": ["1 Series", "2 Series", "3 Series", "4 Series", "5 Series", "6 Series", "7 Series", "8 Series", "X1", "X2", "X3", "X4", "X5", "X6", "X7", "Z4", "M2", "M3", "M4", "M5"],
+    "Mercedes-Benz": ["A-Class", "B-Class", "C-Class", "E-Class", "S-Class", "CLA", "CLS", "GLA", "GLB", "GLC", "GLE", "GLS", "G-Class", "AMG GT"],
+    "Volkswagen": ["Polo", "Golf", "Jetta", "Passat", "Tiguan", "Touareg", "Arteon", "T-Roc", "T-Cross"],
+    "Toyota": ["Corolla", "Camry", "RAV4", "Land Cruiser", "Highlander", "C-HR", "Yaris", "Avalon", "4Runner"],
+    "Honda": ["Civic", "Accord", "CR-V", "HR-V", "Pilot", "Fit", "Odyssey"],
+    "Nissan": ["Qashqai", "X-Trail", "Juke", "Leaf", "Navara", "Patrol", "GT-R"],
+    "Mazda": ["Mazda3", "Mazda6", "CX-3", "CX-5", "CX-9", "MX-5"],
+    "Ford": ["Focus", "Fiesta", "Mondeo", "Mustang", "Kuga", "Explorer", "Ranger", "F-150"],
+    "Chevrolet": ["Cruze", "Malibu", "Camaro", "Corvette", "Tahoe", "Suburban"],
+    "Hyundai": ["Solaris", "Elantra", "Sonata", "Tucson", "Santa Fe", "Creta", "Kona"],
+    "Kia": ["Rio", "Cerato", "Optima", "Sportage", "Sorento", "Seltos", "Stinger"],
+    "Lexus": ["IS", "ES", "GS", "LS", "NX", "RX", "GX", "LX", "UX"],
+    "Volvo": ["S60", "S90", "V60", "V90", "XC40", "XC60", "XC90"],
+    "Skoda": ["Fabia", "Rapid", "Octavia", "Superb", "Kodiaq", "Karoq"],
+    "Renault": ["Logan", "Sandero", "Duster", "Kaptur", "Arkana", "Megane"],
+    "Peugeot": ["208", "308", "408", "508", "2008", "3008", "5008"],
+    "Citroen": ["C3", "C4", "C5", "C3 Aircross", "C5 Aircross"],
+    "Opel": ["Corsa", "Astra", "Insignia", "Crossland", "Grandland"],
+    "Mitsubishi": ["Lancer", "Outlander", "Pajero", "ASX", "Eclipse Cross"],
+    "Subaru": ["Impreza", "Legacy", "Outback", "Forester", "XV", "WRX"],
+    "Porsche": ["911", "Cayenne", "Macan", "Panamera", "Taycan"],
+    "Land Rover": ["Defender", "Discovery", "Range Rover", "Range Rover Sport", "Range Rover Evoque"],
+    "Jaguar": ["XE", "XF", "XJ", "F-Pace", "E-Pace", "I-Pace"],
+    "Infiniti": ["Q50", "Q60", "Q70", "QX50", "QX60", "QX80"],
+    "Acura": ["ILX", "TLX", "RLX", "MDX", "RDX"],
+    "Jeep": ["Compass", "Cherokee", "Grand Cherokee", "Wrangler", "Gladiator"],
+    "Dodge": ["Charger", "Challenger", "Durango", "Ram"],
+    "Chrysler": ["300", "Pacifica"]
+  };
 
+  const carBrands = Object.keys(carData).sort();
   const years = Array.from({length: 30}, (_, i) => 2024 - i);
+
+  const availableModels = useMemo(() => {
+    if (!selectedBrand) return [];
+    return carData[selectedBrand as keyof typeof carData] || [];
+  }, [selectedBrand]);
 
   return (
     <div className="min-h-screen pt-24 px-6 pb-20">
@@ -149,7 +182,79 @@ const Services = () => {
           <Card className="p-8">
             <h3 className="text-2xl font-heading font-bold mb-6 text-center">Калькулятор чип-тюнинга</h3>
             <div className="space-y-4">
-              <div className="space-y-3">
+              <div className="space-y-4 pb-4 border-b border-border">
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Марка</label>
+                  <select 
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    value={selectedBrand}
+                    onChange={(e) => {
+                      setSelectedBrand(e.target.value);
+                      setSelectedModel("");
+                    }}
+                  >
+                    <option value="">Выберите марку</option>
+                    {carBrands.map((brand) => (
+                      <option key={brand} value={brand}>{brand}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Модель</label>
+                  <select 
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                    value={selectedModel}
+                    onChange={(e) => setSelectedModel(e.target.value)}
+                    disabled={!selectedBrand}
+                  >
+                    <option value="">Выберите модель</option>
+                    {availableModels.map((model) => (
+                      <option key={model} value={model}>{model}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Год</label>
+                    <select 
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                      value={selectedYear}
+                      onChange={(e) => setSelectedYear(e.target.value)}
+                    >
+                      <option value="">Год</option>
+                      {years.map((year) => (
+                        <option key={year} value={year}>{year}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">Объем (л)</label>
+                    <input
+                      type="text"
+                      placeholder="1.6"
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                      value={selectedEngine}
+                      onChange={(e) => setSelectedEngine(e.target.value)}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">л.с.</label>
+                    <input
+                      type="text"
+                      placeholder="150"
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
+                      value={selectedPower}
+                      onChange={(e) => setSelectedPower(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-2 max-h-[400px] overflow-y-auto">
                 <label className="flex items-center gap-3 cursor-pointer hover:bg-secondary/50 p-3 rounded-lg transition-colors">
                   <input 
                     type="checkbox" 
@@ -229,9 +334,29 @@ const Services = () => {
                   />
                   <span className="font-medium">Отключение ошибок DTC</span>
                 </label>
+
+                <label className="flex items-center gap-3 cursor-pointer hover:bg-secondary/50 p-3 rounded-lg transition-colors">
+                  <input 
+                    type="checkbox" 
+                    className="w-5 h-5"
+                    checked={tuningOptions.euro2}
+                    onChange={() => handleOptionChange('euro2')}
+                  />
+                  <span className="font-medium">Перевод на Евро-2</span>
+                </label>
+
+                <label className="flex items-center gap-3 cursor-pointer hover:bg-secondary/50 p-3 rounded-lg transition-colors">
+                  <input 
+                    type="checkbox" 
+                    className="w-5 h-5"
+                    checked={tuningOptions.noImmobilizer}
+                    onChange={() => handleOptionChange('noImmobilizer')}
+                  />
+                  <span className="font-medium">Отключение иммобилайзера</span>
+                </label>
               </div>
               
-              <div className="pt-6 border-t border-border">
+              <div className="pt-4 border-t border-border">
                 <p className="text-sm text-muted-foreground mb-4">
                   Итоговая стоимость рассчитывается индивидуально
                 </p>
