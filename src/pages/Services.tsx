@@ -9,6 +9,7 @@ const Services = () => {
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedEngine, setSelectedEngine] = useState("");
   const [selectedPower, setSelectedPower] = useState("");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [tuningOptions, setTuningOptions] = useState({
     stage1: false,
     speedLim: false,
@@ -79,24 +80,42 @@ const Services = () => {
     return carData[selectedBrand as keyof typeof carData] || [];
   }, [selectedBrand]);
 
-  const getCarImage = () => {
-    if (!selectedBrand && !selectedModel) {
-      return "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/c9df873a-1ce7-4a14-a5cc-62b840b9c3b9.jpg";
-    }
-    
+  const getCarImages = () => {
     const suvModels = ["Q3", "Q5", "Q7", "Q8", "X1", "X2", "X3", "X4", "X5", "X6", "X7", "GLA", "GLB", "GLC", "GLE", "GLS", "G-Class", "Tiguan", "Touareg", "T-Roc", "T-Cross", "RAV4", "Land Cruiser", "Highlander", "C-HR", "4Runner", "CR-V", "HR-V", "Pilot", "Qashqai", "X-Trail", "Juke", "CX-3", "CX-5", "CX-9", "Kuga", "Explorer", "Tahoe", "Suburban", "Tucson", "Santa Fe", "Creta", "Kona", "Sportage", "Sorento", "Seltos", "NX", "RX", "GX", "LX", "UX", "XC40", "XC60", "XC90", "Kodiaq", "Karoq", "Duster", "Kaptur", "2008", "3008", "5008", "C3 Aircross", "C5 Aircross", "Crossland", "Grandland", "Outlander", "Pajero", "ASX", "Eclipse Cross", "Forester", "XV", "Outback", "Cayenne", "Macan", "Defender", "Discovery", "Range Rover", "Range Rover Sport", "Range Rover Evoque", "F-Pace", "E-Pace", "I-Pace", "QX50", "QX60", "QX80", "MDX", "RDX", "Compass", "Cherokee", "Grand Cherokee", "Wrangler", "Durango", "Pacifica"];
     
     const sportsModels = ["TT", "R8", "M2", "M3", "M4", "M5", "Z4", "AMG GT", "911", "Taycan", "Mustang", "Camaro", "Corvette", "Stinger", "GT-R", "MX-5", "WRX", "Charger", "Challenger"];
     
     if (selectedModel && sportsModels.includes(selectedModel)) {
-      return "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/ff2765d8-718c-483c-93bf-04f4b55c8ae1.jpg";
+      return [
+        "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/ff2765d8-718c-483c-93bf-04f4b55c8ae1.jpg",
+        "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/12815838-b88b-4c3b-8859-8b82fb6c4737.jpg",
+        "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/c9df873a-1ce7-4a14-a5cc-62b840b9c3b9.jpg"
+      ];
     }
     
     if (selectedModel && suvModels.includes(selectedModel)) {
-      return "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/84be35c5-3a7f-4bbe-8843-04680fa1b8ef.jpg";
+      return [
+        "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/84be35c5-3a7f-4bbe-8843-04680fa1b8ef.jpg",
+        "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/36af9320-dd81-4fb9-8210-df7f356f3b20.jpg",
+        "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/c9df873a-1ce7-4a14-a5cc-62b840b9c3b9.jpg"
+      ];
     }
     
-    return "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/9dd5bfda-05fc-4d6e-8f8d-f5e8e0fa7264.jpg";
+    return [
+      "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/9dd5bfda-05fc-4d6e-8f8d-f5e8e0fa7264.jpg",
+      "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/b65be0e1-6650-40b2-95bf-5fa2827da310.jpg",
+      "https://cdn.poehali.dev/projects/6d5dac61-2235-4c93-9ad6-0d9340e02776/files/c9df873a-1ce7-4a14-a5cc-62b840b9c3b9.jpg"
+    ];
+  };
+
+  const carImages = getCarImages();
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % carImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + carImages.length) % carImages.length);
   };
 
   return (
@@ -203,18 +222,46 @@ const Services = () => {
             <h3 className="text-2xl font-heading font-bold mb-6 text-center">Калькулятор чип-тюнинга</h3>
             <div className="space-y-4">
               {(selectedBrand || selectedModel) && (
-                <div className="relative h-48 rounded-lg overflow-hidden mb-4">
+                <div className="relative h-64 rounded-lg overflow-hidden mb-4 group">
                   <img
-                    src={getCarImage()}
+                    src={carImages[currentImageIndex]}
                     alt={`${selectedBrand} ${selectedModel}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+                  
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <Icon name="ChevronLeft" size={24} />
+                  </button>
+                  
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <Icon name="ChevronRight" size={24} />
+                  </button>
+                  
                   {selectedBrand && (
                     <div className="absolute bottom-4 left-4 right-4">
                       <p className="text-xl font-heading font-bold text-white">
                         {selectedBrand} {selectedModel}
                       </p>
+                      <div className="flex gap-2 mt-2">
+                        {carImages.map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => setCurrentImageIndex(index)}
+                            className={`w-2 h-2 rounded-full transition-all ${
+                              index === currentImageIndex 
+                                ? 'bg-white w-6' 
+                                : 'bg-white/50 hover:bg-white/75'
+                            }`}
+                          />
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -229,6 +276,7 @@ const Services = () => {
                     onChange={(e) => {
                       setSelectedBrand(e.target.value);
                       setSelectedModel("");
+                      setCurrentImageIndex(0);
                     }}
                   >
                     <option value="">Выберите марку</option>
@@ -243,7 +291,10 @@ const Services = () => {
                   <select 
                     className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none transition-colors"
                     value={selectedModel}
-                    onChange={(e) => setSelectedModel(e.target.value)}
+                    onChange={(e) => {
+                      setSelectedModel(e.target.value);
+                      setCurrentImageIndex(0);
+                    }}
                     disabled={!selectedBrand}
                   >
                     <option value="">Выберите модель</option>
